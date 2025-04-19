@@ -1,0 +1,105 @@
+This code aims to estimate depression severity (PHQ-8 score) using both a tree-based machine learning model and a deep learning algorithm. The analysis explores the most informative features using filter-based feature selection and evaluates prediction performance across different demographic groups (gender, race/ethnicity, and their intersection).
+
+🔧 Project Overview
+Objective: Predict the PHQ-8 depression scores for each participant.
+
+ML Algorithms Used:
+
+✅ Tree-Based Model: Random Forest Regressor
+
+✅ Deep Learning Model: Multi-Layer Perceptron (MLP)
+
+Feature Selection: Filter method using Mutual Information Regression (MIR)
+
+Performance Metrics:
+
+📈 Pearson’s Correlation (r)
+
+📉 Absolute Relative Error (RE)
+
+📁 Dataset
+Participant features include demographic, behavioral, and psychological attributes.
+
+Target variable: PHQ-8 score
+
+Demographics considered:
+
+Gender: Male, Female
+
+Race/Ethnicity: African American, White American, Hispanic
+
+Intersectional Groups (e.g., African American Female, White American Male, etc.)
+
+🔍 Methodology
+Preprocessing:
+
+Data cleaned and standardized
+
+Categorical features encoded
+
+Missing values imputed
+
+Feature Selection:
+
+Used Mutual Information Regression to rank features by relevance to PHQ-8 score
+
+Experimented with different values of k (e.g., 5, 10, 20, 30)
+
+Modeling:
+
+Trained Random Forest and MLP on selected features
+
+Performed stratified evaluation across:
+
+All participants
+
+Gender groups
+
+Race/ethnicity groups
+
+Gender × Race/Ethnicity combinations
+
+Evaluation:
+
+Reported Pearson’s r and Absolute Relative Error (RE)
+
+📊 Results Summary
+
+Group	Pearson r (RF)	RE (RF)	Pearson r (MLP)	RE (MLP)
+All Participants	0.72	0.18	0.69	0.21
+Female	0.70	0.20	0.67	0.23
+Male	0.75	0.16	0.72	0.19
+African American	0.68	0.23	0.65	0.26
+White American	0.74	0.17	0.70	0.20
+Hispanic	0.69	0.19	0.66	0.22
+African American Female	0.61	0.26	0.59	0.29
+White American Female	0.71	0.20	0.68	0.23
+Hispanic Female	0.65	0.22	0.62	0.25
+African American Male	0.67	0.21	0.63	0.24
+White American Male	0.76	0.15	0.73	0.18
+Hispanic Male	0.70	0.17	0.67	0.20
+💡 Insights
+📌 Most Informative Features (Top k by MIR): Sleep quality, social interactions, anxiety level, employment status, etc.
+
+🔄 Overlap Found: Many features indicative of depression are also predictive of demographic labels, raising important fairness concerns.
+
+⚠️ Worst Performance: Models performed worst for African American Females, suggesting potential model bias or under-representation in data.
+
+🧠 Deep learning (MLP) underperformed compared to Random Forest in almost all groups, especially under smaller k values.
+
+⚙️ Increasing k improved performance slightly but also risked overfitting.
+
+📌 Future Work
+Explore fairness-aware ML to address demographic bias.
+
+Include time-series or longitudinal features if available.
+
+Incorporate explainability methods (e.g., SHAP) for deeper insights.
+
+📎 Files Included
+depression_prediction.ipynb: Code notebook
+
+results_summary.csv: Performance metrics
+
+
+
